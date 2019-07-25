@@ -1,5 +1,7 @@
-package com.example.jenkins.customers
+package com.example.jenkins.unit
 
+import com.example.jenkins.customers.Customer
+import com.example.jenkins.customers.CustomerRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import reactor.test.StepVerifier

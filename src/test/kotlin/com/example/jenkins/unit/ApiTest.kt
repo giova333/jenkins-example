@@ -1,4 +1,4 @@
-package com.example.jenkins.customers
+package com.example.jenkins.unit
 
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

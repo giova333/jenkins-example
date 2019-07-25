@@ -1,4 +1,4 @@
-package com.example.jenkins.customers
+package com.example.jenkins.unit
 
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.jdbc.Sql
