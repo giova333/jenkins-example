@@ -4,6 +4,7 @@ spring:
     username: sa
     password:
 
+
 management:
   endpoints:
     web:
@@ -11,3 +12,5 @@ management:
       exposure:
         include:
           - health
+server:
+  port: 8081

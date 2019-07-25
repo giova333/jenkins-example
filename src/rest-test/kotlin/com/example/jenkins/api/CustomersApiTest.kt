@@ -8,7 +8,7 @@ import org.junit.Test
 
 class CustomersApiTest {
 
-    private val url = "http://localhost:8080/customers"
+    private val url = "http://localhost:8081/customers"
 
     @Test
     fun `End 2 End Api Test`() {
