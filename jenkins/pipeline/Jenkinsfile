@@ -1,10 +1,9 @@
 timeout(time: 1, unit: 'HOURS') {
     node {
-        def gitUrl = 'https://github.com/giova333/jenkins-example.git'
         def buildTag = ("${env.BUILD_TAG}" as String).replaceAll("\\s", "")
         def dockerImage = "giova333/customer-service:$buildTag"
         stage('Preparation') {
-            git gitUrl
+            checkout scm
             sh '"mvn" clean compile'
         }
         stage('Unit Tests') {
