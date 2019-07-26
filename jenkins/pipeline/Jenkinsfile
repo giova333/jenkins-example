@@ -1,0 +1,32 @@
+timeout(time: 1, unit: 'HOURS') {
+    node {
+        def gitUrl = 'https://github.com/giova333/jenkins-example.git'
+        def buildTag = ("${env.BUILD_TAG}" as String).replaceAll("\\s", "")
+        def dockerImage = "giova333/customer-service:$buildTag"
+        stage('Preparation') {
+            git gitUrl
+            sh '"mvn" clean compile'
+        }
+        stage('Unit Tests') {
+            sh '"mvn" clean package -P Unit'
+        }
+        stage("Docker Build/Deploy") {
+            docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
+                def image = docker.build dockerImage
+                image.push()
+            }
+        }
+        stage("End2End Tests") {
+            def container = docker.image(dockerImage).run("-p 8081:8081 --name customer-service --network=jenkins_default")
+            try {
+                sh '"mvn" test -P Api'
+            } finally {
+                container.stop()
+            }
+        }
+        stage('Results') {
+            junit '**/target/surefire-reports/TEST-*.xml'
+            archiveArtifacts 'target/*.jar'
+        }
+    }
+}
